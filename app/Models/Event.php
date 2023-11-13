@@ -14,4 +14,9 @@ class Event extends Model
     {
         return $this->hasMany(Member::class);
     }
+
+    public function feedbacks(): HasMany
+    {
+        return $this->hasMany(Feedback::class);
+    }
 }
