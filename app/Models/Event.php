@@ -10,11 +10,6 @@ class Event extends Model
 {
     use HasFactory;
 
-    public function members(): HasMany
-    {
-        return $this->hasMany(Member::class);
-    }
-
     public function feedbacks(): HasMany
     {
         return $this->hasMany(Feedback::class);
