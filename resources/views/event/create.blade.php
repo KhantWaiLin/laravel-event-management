@@ -2,10 +2,26 @@
     <section id="create-event" class="w-full h-full flex flex-col justify-center items-center" style="height: calc(100vh - 4.5em);">
         <div class="p-6 flex flex-col  gap-3 bg-white rounded-lg w-[500px] ">
             <h1 class="font-bold text-xl">Create Event</h1>
-            <form>
-                <div class="flex flex-col gap-2">
+            <form method="post" action="{{route('event.store')}}">
+                @csrf
+                @method('post')
+                <div class="flex flex-col gap-2 mb-5">
                     <label class="text-md">Name</label>
-                    <input type="text" placeholder="Enter name" />
+                    <input type="text" id="name" name="name" placeholder="Enter name" value="" />
+                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                </div>
+                <div class="flex flex-col gap-2 mb-5">
+                    <label class="text-md">Description</label>
+                    <input type="text" id="description" name="description" placeholder="Enter Description" value="" />
+                    <x-input-error class="mt-2" :messages="$errors->get('description')" />
+                </div>
+                <div class="flex mb-5">
+                    <input type="file" id="profile" name="profile" value=""> 
+                </div>
+                <div class="flex ">
+                    <x-primary-button>
+                        create
+                    </x-primary-button>
                 </div>
             </form>
         </div>

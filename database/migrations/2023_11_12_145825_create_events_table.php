@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->integer('count');
+            $table->integer('count')->default(0);
             $table->string('status')->default(EventStatus::OPEN->value);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
