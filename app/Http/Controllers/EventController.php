@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+       return view('event.index');
     }
 
     /**
@@ -31,12 +31,14 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        dd($request->all());
         $event = Event::create([
             'name' => $request->name,
             'description' => $request->description,
             'user_id' => auth()->id(),
         ]);
+        if ($request->file('attachment')) {
+            $this->storeImage($request, $event);
+        }
         return redirect(route('event.index'));
     }
 
@@ -74,11 +76,11 @@ class EventController extends Controller
 
     protected function storeImage($request, $event)
     {
-        $ext = $request->file('profile')->extension();
-        $contents = file_get_contents($request->file('profile'));
+        $ext = $request->file('attachment')->extension();
+        $contents = file_get_contents($request->file('attachment'));
         $filename = Str::random();
-        $path = "event-profiles/.$filename.$ext";
+        $path = "attachments/.$filename.$ext";
         Storage::disk('public')->put($path, $contents);
-        // $ticket->update(['attachment' => $path]);
+        $event->update(['attachment' => $path]);
     }
 }

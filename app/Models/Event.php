@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Event extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description','user_id'];
+    protected $fillable = ['name', 'description','user_id','attachment',];
 
 
     public function feedbacks(): HasMany

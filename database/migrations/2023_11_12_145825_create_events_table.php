@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('count')->default(0);
             $table->string('status')->default(EventStatus::OPEN->value);
             $table->foreignId('user_id')->constrained();
+            $table->string('attachment')->nullable();
             $table->timestamps();
         });
     }
