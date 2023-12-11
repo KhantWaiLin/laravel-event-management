@@ -16,7 +16,8 @@ class EventController extends Controller
      */
     public function index()
     {
-       return view('event.index');
+       $events = Event::paginate(5);
+       return view('event.index',compact('events'));
     }
 
     /**
