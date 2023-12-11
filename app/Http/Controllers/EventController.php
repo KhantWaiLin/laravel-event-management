@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Admin;
 use App\Models\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -39,6 +40,7 @@ class EventController extends Controller
         if ($request->file('attachment')) {
             $this->storeImage($request, $event);
         }
+        // dd($event);
         return redirect(route('event.index'));
     }
 
