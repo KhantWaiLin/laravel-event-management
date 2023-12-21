@@ -11,7 +11,7 @@
             @if($event->admin->email != $auth_user->email)
             @if($event->status == $event_status[0]->value)
             <div class="mt-5 flex w-full justify-end">
-                <button class=" w-fit bg-white p-2 font-sans">
+                <button class=" w-fit bg-white p-1 font-sans">
                     <a href="{{ route('event.register_get', ['event' => $event, 'user' => $auth_user]) }}">
                         Register
                     </a>
@@ -20,6 +20,15 @@
             @elseif($event->status == $event_status[1]->value)
             <button>Close</button>
             @endif
+            @elseif($event->admin->email == $auth_user->email)
+            <div class="mt-5 flex w-full justify-between">
+                <p class="text-white">Status: {{$event->status}}</p>
+                <button class=" w-fit bg-white p-1 pl-3 pr-3 font-sans">
+                    <a href="{{route('event.edit',['event'=>$event])}}">
+                       Edit
+                    </a>
+                </button>
+            </div>
             @endif
         </div>
         <div class="lg:flex-none w-[300px] flex-auto">
