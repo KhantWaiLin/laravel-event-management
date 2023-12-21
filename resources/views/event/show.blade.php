@@ -23,11 +23,20 @@
             @elseif($event->admin->email == $auth_user->email)
             <div class="mt-5 flex w-full justify-between">
                 <p class="text-white">Status: {{$event->status}}</p>
-                <button class=" w-fit bg-white p-1 pl-3 pr-3 font-sans">
-                    <a href="{{route('event.edit',['event'=>$event])}}">
-                       Edit
-                    </a>
-                </button>
+                <div class="flex gap-3">
+                    <form action="{{route('event.destroy',['event'=>$event])}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class=" w-fit bg-white p-1 pl-3 pr-3 font-sans">
+                            Delete
+                        </button>
+                    </form>
+                    <button class=" w-fit bg-white p-1 pl-3 pr-3 font-sans">
+                        <a href="{{route('event.edit',['event'=>$event])}}">
+                            Edit
+                        </a>
+                    </button>
+                </div>
             </div>
             @endif
         </div>

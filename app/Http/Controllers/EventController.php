@@ -121,7 +121,9 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        // dd($event);
+        $event->delete();
+        return redirect(route('event.index'));
     }
 
     protected function storeImage($request, $event)
