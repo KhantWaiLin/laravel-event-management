@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email');
             $table->foreignId('event_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

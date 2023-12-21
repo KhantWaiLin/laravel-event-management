@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EventStatus;
 use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\StoreGuestRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Admin;
 use App\Models\Event;
+use App\Models\Guest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -17,6 +22,13 @@ class EventController extends Controller
     public function index()
     {
        $events = Event::paginate(5);
+       
+       for($i = 0 ; $i < count($events); $i++){
+        $event = $events[$i];
+        $admin = Event::find($event->id)->admin;
+        $event["admin"] = $admin;
+        $events[$i] = $event;
+       }
        return view('event.index',compact('events'));
     }
 
@@ -38,11 +50,33 @@ class EventController extends Controller
             'description' => $request->description,
             'user_id' => auth()->id(),
         ]);
+        $user = Auth::user();
+        $new_user = Admin::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'event_id' => $event->id,
+            'user_id' => $user->id,
+        ]);
         if ($request->file('attachment')) {
             $this->storeImage($request, $event);
         }
-        // dd($event);
+        // dd($new_user);
         return redirect(route('event.index'));
+    }
+
+    public function register_event($event, $user){
+        return view('guest.create',compact('event', 'user'));
+    }
+
+    public function register_event_store(StoreGuestRequest $request){
+        $guest = Guest::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'user_id' => $request->user_id,
+            'event_id' => $request->event_id
+        ]);
+        $eventId = $request->event_id;
+        return redirect()->route('event.show',['event'=>$eventId]);
     }
 
     /**
@@ -50,7 +84,9 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $event_status = EventStatus::cases();
+        $auth_user = Auth::user();
+        return view('event.show',compact('event','event_status','auth_user'));
     }
 
     /**

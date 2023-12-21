@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Admin extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','event_id','user_id'];
+    protected $fillable = ['name','email','event_id','user_id'];
 
     public function event(): HasOne
     {

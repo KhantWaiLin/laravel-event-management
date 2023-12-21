@@ -19,17 +19,16 @@ class GuestController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($event, $user)
     {
-        //
+        return view('guest.create', compact('event', 'user'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreGuestRequest $request)
     {
-        //
+       //
     }
 
     /**
