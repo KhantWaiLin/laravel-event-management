@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Enums\EventStatus;
 use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\StoreFeedbackRequest;
 use App\Http\Requests\StoreGuestRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Admin;
 use App\Models\Event;
+use App\Models\Feedback;
 use App\Models\Guest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -85,9 +87,16 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+        $feedbacks = $event->feedbacks;
+        for($i = 0; $i < count($feedbacks); $i++){
+            $feedback = $feedbacks[$i];
+            $feedback["user"] = $feedback->user;
+            $feedbacks[$i] = $feedback;
+        }
+        // dd($feedbacks);
         $event_status = EventStatus::cases();
         $auth_user = Auth::user();
-        return view('event.show', compact('event', 'event_status', 'auth_user'));
+        return view('event.show', compact('event', 'event_status', 'auth_user','feedbacks'));
     }
 
     /**
@@ -134,5 +143,15 @@ class EventController extends Controller
         $path = "attachments/.$filename.$ext";
         Storage::disk('public')->put($path, $contents);
         $event->update(['attachment' => $path]);
+    }
+
+    public function add_feedback(StoreFeedbackRequest $request)
+    {
+        $feedback = Feedback::create([
+            'feedback' => $request->feedback,
+            'user_id' => $request->user_id,
+            'event_id' => $request->event_id,
+        ]);
+        return redirect(route('event.show', ['event' => $request->event_id]));
     }
 }

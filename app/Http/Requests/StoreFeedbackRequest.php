@@ -11,7 +11,7 @@ class StoreFeedbackRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreFeedbackRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+           'feedback'=>['required','string'],
+           'user_id' =>['required'],
+           'event_id' => ['required'],
         ];
     }
 }

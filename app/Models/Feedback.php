@@ -9,8 +9,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Feedback extends Model
 {
     use HasFactory;
+    protected $table = 'feedbacks';
+    protected $fillable = ['feedback', 'user_id', 'event_id'];
     public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
