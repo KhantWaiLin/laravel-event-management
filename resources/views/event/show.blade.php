@@ -1,3 +1,6 @@
+@php
+use Carbon\Carbon;
+@endphp
 <x-app-layout :create="false">
     <div class="flex flex-col justify-center p-10 gap-5">
         <div class="flex justify-center gap-2">
@@ -55,7 +58,7 @@
                         </div>
                         <div class="text-white flex w-full relative">
                             <p>Time:</p>
-                            <p class="absolute left-16">{{$event->from_time}} to {{$event->to_time}}</p>
+                            <p class="absolute left-16">{{Carbon::parse($event->from_time)->format('h:i A')}} to {{Carbon::parse($event->to_time)->format('h:i A')}}</p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +79,7 @@
                 <input type="hidden" name="event_id" value="{{$event->id}}" />
                 <input type="hidden" name="user_id" value="{{$auth_user->id}}" />
                 <div class="flex gap-5 w-full justify-between">
-                    <input type="text" name="feedback" value="" class="p-1 flex-1" autocomplete="FALSE">
+                    <input type="text" name="feedback" placeholder="Add a feedback" value="" class="p-1 flex-1" autocomplete="FALSE">
                     <button type="submit" class="p-1 pl-3 pr-3 h-fit bg-white">Submit</button>
                 </div>
             </form>

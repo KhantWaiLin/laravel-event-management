@@ -114,7 +114,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(StoreEventRequest $request, Event $event)
     {
         $event->update([
             'name' => $request->name,

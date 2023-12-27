@@ -47,7 +47,10 @@
                     <input type="file" name="attachment" class="w-full" value="" placeholder="Select" />
                     <x-input-error class="mt-2" :messages="$errors->get('attachment')" />
                 </div>
-                <div class="flex ">
+                <div class="flex justify-end gap-5">
+                    <a href="{{route('event.index')}}">
+                        <button type="button" class="p-1 pl-3 pr-3 rounded-lg hover:bg-slate-200 bg-slate-100 text-black border-[1px] border-black">Cancel</button>
+                    </a>
                     <button type="submit" class="p-1 pl-3 pr-3 rounded-lg hover:bg-slate-900 bg-slate-800 text-white">Create</button>
                 </div>
             </form>
