@@ -42,12 +42,20 @@
                 @endif
             </div>
             <div class="lg:flex-none w-[300px] flex-auto">
-                <div class="w-full h-[300px] border-2 border-zinc-700 p-3">
-                    <div>
-                        <h3 class="text-white mb-3">Event Detail</h3>
-                        <div class="text-white flex gap-10">
+                <div class="w-full h-[200px] border-2 border-zinc-700 p-3">
+                    <h3 class="text-white mb-5">Event Detail</h3>
+                    <div class="flex flex-col gap-2">
+                        <div class="text-white w-full flex relative">
                             <p>Admin:</p>
-                            <p>{{$event->admin->name}}</p>
+                            <p class="absolute left-16">{{$event->admin->name}}</p>
+                        </div>
+                        <div class="text-white flex w-full relative">
+                            <p>Date:</p>
+                            <p class="absolute left-16">{{$event->from_date}} to {{$event->to_date}}</p>
+                        </div>
+                        <div class="text-white flex w-full relative">
+                            <p>Time:</p>
+                            <p class="absolute left-16">{{$event->from_time}} to {{$event->to_time}}</p>
                         </div>
                     </div>
                 </div>

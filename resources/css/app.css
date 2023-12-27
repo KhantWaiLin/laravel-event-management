@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-select{
+select {
     padding: 0;
     padding-right: 2.5em;
+}
+
+.datepicker-dropdown.datepicker-orient-top:before,
+.datepicker-dropdown.datepicker-orient-top:after {
+    display: none;
 }

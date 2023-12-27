@@ -50,6 +50,10 @@ class EventController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'user_id' => auth()->id(),
+            'from_date' => $request->from_date,
+            'to_date' => $request->to_date,
+            'from_time' => $request->from_time,
+            'to_time' => $request->to_time,
         ]);
         $user = Auth::user();
         $new_user = Admin::create([
@@ -88,7 +92,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
         $feedbacks = $event->feedbacks;
-        for($i = 0; $i < count($feedbacks); $i++){
+        for ($i = 0; $i < count($feedbacks); $i++) {
             $feedback = $feedbacks[$i];
             $feedback["user"] = $feedback->user;
             $feedbacks[$i] = $feedback;
@@ -96,7 +100,7 @@ class EventController extends Controller
         // dd($feedbacks);
         $event_status = EventStatus::cases();
         $auth_user = Auth::user();
-        return view('event.show', compact('event', 'event_status', 'auth_user','feedbacks'));
+        return view('event.show', compact('event', 'event_status', 'auth_user', 'feedbacks'));
     }
 
     /**
@@ -117,6 +121,10 @@ class EventController extends Controller
             'description' => $request->description,
             'user_id' => auth()->id(),
             'status' => $request->status,
+            'from_date' => $request->from_date,
+            'to_date' => $request->to_date,
+            'from_time' => $request->from_time,
+            'to_time' => $request->to_time,
         ]);
         if ($request->file('attachment')) {
             Storage::disk('public')->delete($event->attachment);

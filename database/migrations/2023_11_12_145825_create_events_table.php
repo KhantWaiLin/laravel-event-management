@@ -16,6 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->date('from_date');
+            $table->date('to_date');
+            $table->time('from_time');
+            $table->time('to_time');
             $table->integer('count')->default(0);
             $table->string('status')->default(EventStatus::OPEN->value);
             $table->foreignId('user_id')->constrained();

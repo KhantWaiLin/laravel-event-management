@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Event extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'user_id', 'attachment', 'status'];
+    protected $fillable = ['name', 'description', 'user_id', 'attachment', 'status', 'from_date', 'to_date', 'from_time', 'to_time'];
 
     public function admin(): HasOne
     {
