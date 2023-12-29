@@ -20,4 +20,8 @@ class Event extends Model
     {
         return $this->hasMany(Feedback::class);
     }
+    public function guests() : HasMany
+    {
+        return $this->hasMany(Guest::class);
+    }
 }

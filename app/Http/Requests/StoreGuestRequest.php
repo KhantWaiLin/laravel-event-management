@@ -23,7 +23,7 @@ class StoreGuestRequest extends FormRequest
     {
         return [
             'name'=>['required', 'string'],
-            'email'=>['required', 'email'],
+            'email'=>['required', 'email', 'unique:App\Models\User'],
             'user_id' => ['required'],
             'event_id' => ['required'],
         ];

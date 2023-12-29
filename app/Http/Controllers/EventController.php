@@ -6,7 +6,6 @@ use App\Enums\EventStatus;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\StoreFeedbackRequest;
 use App\Http\Requests\StoreGuestRequest;
-use App\Http\Requests\UpdateEventRequest;
 use App\Models\Admin;
 use App\Models\Event;
 use App\Models\Feedback;
@@ -92,12 +91,13 @@ class EventController extends Controller
     public function show(Event $event)
     {
         $feedbacks = $event->feedbacks;
+        $count = $event->guests;
         for ($i = 0; $i < count($feedbacks); $i++) {
             $feedback = $feedbacks[$i];
             $feedback["user"] = $feedback->user;
             $feedbacks[$i] = $feedback;
         }
-        // dd($feedbacks);
+        $event["guest_count"] = count($count);
         $event_status = EventStatus::cases();
         $auth_user = Auth::user();
         return view('event.show', compact('event', 'event_status', 'auth_user', 'feedbacks'));

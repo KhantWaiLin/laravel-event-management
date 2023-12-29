@@ -44,21 +44,25 @@ use Carbon\Carbon;
                 </div>
                 @endif
             </div>
-            <div class="lg:flex-none w-[300px] flex-auto">
+            <div class="lg:flex-none w-[350px] flex-auto">
                 <div class="w-full h-[200px] border-2 border-zinc-700 p-3">
                     <h3 class="text-white mb-5">Event Detail</h3>
                     <div class="flex flex-col gap-2">
                         <div class="text-white w-full flex relative">
                             <p>Admin:</p>
-                            <p class="absolute left-16">{{$event->admin->name}}</p>
+                            <p class="absolute left-[100px]">{{$event->admin->name}}</p>
                         </div>
                         <div class="text-white flex w-full relative">
                             <p>Date:</p>
-                            <p class="absolute left-16">{{$event->from_date}} to {{$event->to_date}}</p>
+                            <p class="absolute left-[100px]">{{$event->from_date}} to {{$event->to_date}}</p>
                         </div>
                         <div class="text-white flex w-full relative">
                             <p>Time:</p>
-                            <p class="absolute left-16">{{Carbon::parse($event->from_time)->format('h:i A')}} to {{Carbon::parse($event->to_time)->format('h:i A')}}</p>
+                            <p class="absolute left-[100px]">{{Carbon::parse($event->from_time)->format('h:i A')}} to {{Carbon::parse($event->to_time)->format('h:i A')}}</p>
+                        </div>
+                        <div class="text-white flex w-full relative">
+                            <p>Attandees:</p>
+                            <p class="absolute left-[100px]">{{$event->guest_count}}</p>
                         </div>
                     </div>
                 </div>
