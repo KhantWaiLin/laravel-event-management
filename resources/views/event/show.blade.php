@@ -8,7 +8,7 @@ use Carbon\Carbon;
                 <h1 class="text-white text-[3rem]">{{$event->name}}</h1>
                 <p class="text-white indent-10 text-justify pr-2">{{$event->description}}</p>
                 @if($event->attachment)
-                <div class="flex mt-5 h-[300px] bg-gray-400">
+                <div class="flex mt-5 h-[300px] bg-gray-200">
                     <img src="{{"/storage/".$event->attachment}}" class="object-contain" />
                 </div>
                 @endif
