@@ -49,15 +49,20 @@ use Carbon\Carbon;
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-1 flex-col">
-                        @if($event->attachment)
-                        <div class="flex justify-start mb-5 w-full bg-green-50 h-[200px]">
-                            <img src="{{"/storage/".$event->attachment}}" class="object-contain w-fit" />
+                    <div class="flex flex-1 flex-col relative">
+                        <div class="flex justify-center mb-5 w-full bg-green-50 h-[200px]">
+                            @if($event->attachment)
+                            <img src="{{"/storage/".$event->attachment}}" id="show-image" class="object-contain w-fit" />
+                            @else
+                            <img src="#" id="show-image" class="hidden object-contain w-fit" />
+                            @endif
+                            <div class="hidden" id="no-img-text">
+                                <p class="text-gray-500">The chosen image will appear here.</p>
+                            </div>
                         </div>
-                        @endif
 
                         <div class="flex mb-5">
-                            <input type="file" name="attachment" class="w-full" value="" />
+                            <input type="file" accept="image/*" name="attachment" id="attachment" class="w-full" value="{{"/storage/".$event->attachment}}" />
                             <x-input-error class="mt-2" :messages="$errors->get('attachment')" />
                         </div>
                         <div class="flex gap-5 mb-5 items-center">
@@ -79,4 +84,30 @@ use Carbon\Carbon;
             </form>
         </div>
     </section>
+    <script>
+        const imageInput = document.getElementById("attachment");
+        const previewImg = document.getElementById("show-image");
+        const noImg = document.getElementById('no-img-text');
+
+        imageInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = (event) => {
+                    console.log(event);
+                    previewImg.src = event.target.result;
+                    previewImg.style.display = "block";
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                previewImg.style.display = "none";
+                noImg.style.display = "flex"
+                noImg.style.alignItems = "center"
+                noImg.style.justifyContent = "center"
+            }
+        });
+    </script>
 </x-app-layout>

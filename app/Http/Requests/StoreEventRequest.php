@@ -24,7 +24,7 @@ class StoreEventRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'attachment' => ['sometimes', 'file', 'mimes:jpg,jpeg,png,pdf'],
+            'attachment' => ['sometimes', 'file', 'mimes:jpg,jpeg,png'],
             'from_date' => ['required', 'date'],
             'to_date' => ['required', 'date', 'after_or_equal:from_date'],
             'from_time' => ['required', 'date_format:H:i'],

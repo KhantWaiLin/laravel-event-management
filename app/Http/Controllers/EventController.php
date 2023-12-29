@@ -127,7 +127,9 @@ class EventController extends Controller
             'to_time' => $request->to_time,
         ]);
         if ($request->file('attachment')) {
-            Storage::disk('public')->delete($event->attachment);
+            if ($event->attachment) {
+                Storage::disk('public')->delete($event->attachment);
+            }
             $this->storeImage($request, $event);
         }
         return redirect(route('event.index'));

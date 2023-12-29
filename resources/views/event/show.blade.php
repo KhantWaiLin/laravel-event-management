@@ -2,14 +2,14 @@
 use Carbon\Carbon;
 @endphp
 <x-app-layout :create="false">
-    <div class="flex flex-col justify-center p-10 gap-5">
+    <div class="flex flex-col justify-center sm:p-10  lg:pl-[10rem] lg:pr-[10rem]  gap-5">
         <div class="flex justify-center gap-2">
             <div class="grow flex flex-col gap-2">
-                <h1 class="text-white text-lg">{{$event->name}}</h1>
-                <p class="text-white">{{$event->description}}</p>
+                <h1 class="text-white text-[3rem]">{{$event->name}}</h1>
+                <p class="text-white indent-10 text-justify pr-2">{{$event->description}}</p>
                 @if($event->attachment)
-                <div class="mt-5">
-                    <img src="{{"/storage/".$event->attachment}}" />
+                <div class="flex mt-5 h-[300px] bg-gray-400">
+                    <img src="{{"/storage/".$event->attachment}}" class="object-contain" />
                 </div>
                 @endif
                 @if($event->admin->email != $auth_user->email)
