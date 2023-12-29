@@ -11,3 +11,7 @@ select {
 .datepicker-dropdown.datepicker-orient-top:after {
     display: none;
 }
+
+body {
+    font-family: "Arial", sans-serif !important;
+}

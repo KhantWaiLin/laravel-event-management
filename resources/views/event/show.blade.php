@@ -3,7 +3,7 @@ use Carbon\Carbon;
 @endphp
 <x-app-layout :create="false">
     <div class="flex flex-col justify-center sm:p-10  lg:pl-[10rem] lg:pr-[10rem]  gap-5">
-        <div class="flex justify-center gap-2">
+        <div class="flex flex-col lg:flex-row justify-center gap-5">
             <div class="grow flex flex-col gap-2">
                 <h1 class="text-white text-[3rem]">{{$event->name}}</h1>
                 <p class="text-white indent-10 text-justify pr-2">{{$event->description}}</p>
@@ -15,7 +15,7 @@ use Carbon\Carbon;
                 @if($event->admin->email != $auth_user->email)
                 @if($event->status == $event_status[0]->value)
                 <div class="mt-5 flex w-full justify-end">
-                    <button class="w-fit bg-white p-1 font-sans">
+                    <button class="w-fit rounded-sm bg-white p-1 pl-2 pr-2 font-sans">
                         <a href="{{ route('event.register_get', ['event' => $event, 'user' => $auth_user]) }}">
                             Register
                         </a>
@@ -84,7 +84,7 @@ use Carbon\Carbon;
                 <input type="hidden" name="user_id" value="{{$auth_user->id}}" />
                 <div class="flex gap-5 w-full justify-between">
                     <input type="text" name="feedback" placeholder="Add a feedback" value="" class="p-1 flex-1" autocomplete="FALSE">
-                    <button type="submit" class="p-1 pl-3 pr-3 h-fit bg-white">Submit</button>
+                    <button type="submit" class="p-1 pl-3 rounded-sm pr-3 h-fit bg-white">Submit</button>
                 </div>
             </form>
         </div>
